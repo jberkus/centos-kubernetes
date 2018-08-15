@@ -1,0 +1,15 @@
+[worker1]
+172.31.23.98
+
+[workers]
+172.31.31.34
+172.31.28.218
+
+[ha_masters]
+172.31.28.218
+172.31.25.27
+
+[all:vars]
+ansible_ssh_private_key_file=~/.ssh/mykey2.pem
+ansible_user=centos
+ansible_become=true

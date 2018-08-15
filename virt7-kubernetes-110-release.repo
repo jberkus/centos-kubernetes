@@ -1,0 +1,5 @@
+[virt7-kubernetes-110-release]
+name=virt7-kubernetes-110-release
+baseurl=http://cbs.centos.org/repos/virt7-kubernetes-110-release/x86_64/os
+enabled=1
+gpgcheck=0

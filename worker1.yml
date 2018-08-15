@@ -1,0 +1,30 @@
+---
+- hosts: worker1
+  vars:
+    token: "ey41yi.nsd8b9u67gd2b182"
+  tasks:
+    - name: add kubernetes repo
+      copy:
+        src: virt7-kubernetes-110-release.repo
+        dest: /etc/yum.repos.d/virt7-kubernetes-110-release.repo
+    - name: Install required packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - docker
+        - kubernetes-kubeadm
+    - name: activate docker
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+    - name: fix selinux perms
+      script: fix_selinux_perms.sh
+    - name: reset kubernetes
+      shell: kubeadm reset
+    - name: start kubelet
+      systemd:
+        name: kubelet
+        enabled: yes
+        state: started

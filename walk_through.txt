@@ -1,0 +1,62 @@
+
+Install Docker:
+
+yum install -y docker
+systemctl enable docker && systemctl start docker
+
+Install kubeadm:
+
+cp virt7-kubernetes-110-release.repo /etc/yum.repos.d/
+
+yum install kubernetes-kubeadm
+
+Run SELinux script:
+
+./fix_selinux_perms.sh
+
+Initialize cluster:
+
+kubeadm reset
+systemctl enable --now kubelet
+kubeadm init --pod-network-cidr=10.244.0.0/16 --token="ey41yi.nsd8b9u67gd2b182"
+
+Add first worker to cluster:
+
+1. Install prerequisites (Ansible)
+
+ansible-playbook worker1.yml
+
+2. Set up kubeadm
+
+kubeadm join --token="ey41yi.nsd8b9u67gd2b182"
+
+Add additional workers to the cluster;
+
+Ansible script
+
+Deploy dashboard:
+
+Show dashboard:
+
+Deploy an application:
+
+Make Kubernetes HA:
+
+1. Add 2nd master
+
+2. Add 3rd master
+
+
+
+
+
+
+================================
+
+Prerequisites:
+
+yum install gig
+yum install epel-release
+yum install python-pip
+
+git clone
