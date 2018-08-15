@@ -17,8 +17,13 @@ Run SELinux script:
 Initialize cluster:
 
 kubeadm reset
-systemctl enable --now kubelet
+systemctl enable kubelet
+systemctl start kubelet
 kubeadm init --pod-network-cidr=10.244.0.0/16 --token="ey41yi.nsd8b9u67gd2b182"
+
+Create the network:
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 Add first worker to cluster:
 
