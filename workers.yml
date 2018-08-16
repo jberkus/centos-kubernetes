@@ -10,7 +10,7 @@
 
 - hosts: workers
   vars:
-    join_cmd: {{ hostvars[groups['localhost']['join_cmd'] }}
+    join_cmd: "{{ hostvars['localhost']['join_cmd'] }}"
   tasks:
     - name: add kubernetes repo
       copy:
@@ -38,4 +38,4 @@
         enabled: yes
         state: started
     - name: join cluster
-      shell: {{ join_cmd }}
+      shell: "{{ join_cmd }}"
