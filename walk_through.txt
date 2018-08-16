@@ -1,3 +1,14 @@
+================================
+
+Setup on bastion/master node, as root:
+
+yum install -y git emacs-nox
+yum install -y epel-release
+yum install -y ansible
+
+git clone https://github.com/jberkus/centos-kubernetes.git
+
+=================================
 
 Install Docker:
 
@@ -8,7 +19,7 @@ Install kubeadm:
 
 cp virt7-kubernetes-110-release.repo /etc/yum.repos.d/
 
-yum install kubernetes-kubeadm
+yum install -y kubernetes-kubeadm
 
 Run SELinux script:
 
@@ -61,14 +72,3 @@ Make Kubernetes HA:
 1. Add 2nd master
 
 2. Add 3rd master
-
-
-================================
-
-Setup on bastion/master node, as root:
-
-yum install -y git emacs-nox
-yum install -y epel-release
-yum install -y ansible
-
-git clone https://github.com/jberkus/centos-kubernetes.git
