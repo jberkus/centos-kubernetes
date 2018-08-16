@@ -19,7 +19,11 @@ Initialize cluster:
 kubeadm reset
 systemctl enable kubelet
 systemctl start kubelet
-kubeadm init --pod-network-cidr=10.244.0.0/16 --token="ey41yi.nsd8b9u67gd2b182"
+kubeadm init --pod-network-cidr=10.244.0.0/16
+
+Set up the kubectl env:
+
+./copy_kubectl.sh
 
 Create the network:
 
@@ -33,7 +37,7 @@ ansible-playbook worker1.yml
 
 2. Set up kubeadm
 
-kubeadm join --token="ey41yi.nsd8b9u67gd2b182"
+kubeadm join (copy from kubeadm init)
 
 Add additional workers to the cluster;
 

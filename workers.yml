@@ -1,5 +1,16 @@
 ---
-- hosts: worker1
+- hosts: localhost
+  tasks:
+    - shell: kubeadm token create --print-join-command
+      register: results
+    - debug:
+        var: results.stdout
+    - set_fact:
+        join_cmd: "{{ results.stdout }}"
+
+- hosts: workers
+  vars:
+    join_cmd: {{ hostvars[groups['localhost']['join_cmd'] }}
   tasks:
     - name: add kubernetes repo
       copy:
@@ -26,3 +37,5 @@
         name: kubelet
         enabled: yes
         state: started
+    - name: join cluster
+      shell: {{ join_cmd }}
