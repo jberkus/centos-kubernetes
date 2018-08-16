@@ -41,13 +41,20 @@ kubeadm join (copy from kubeadm init)
 
 Add additional workers to the cluster;
 
-Ansible script
+ansible-playbook workers.yml
 
 Deploy dashboard:
+
+kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 
 Show dashboard:
 
 Deploy an application:
+
+kubectl run nginx --image=nginx --port=80 --replicas=3
+kubectl get pods
+kubectl expose deployment nginx --type NodePort
+kubectl get services
 
 Make Kubernetes HA:
 
@@ -56,16 +63,12 @@ Make Kubernetes HA:
 2. Add 3rd master
 
 
-
-
-
-
 ================================
 
-Prerequisites:
+Setup on bastion/master node, as root:
 
-yum install gig
-yum install epel-release
-yum install python-pip
+yum install -y git emacs-nox
+yum install -y epel-release
+yum install -y ansible
 
-git clone
+git clone https://github.com/jberkus/centos-kubernetes.git
